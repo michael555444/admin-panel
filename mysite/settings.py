@@ -2,7 +2,7 @@ import os
 import django_heroku
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
