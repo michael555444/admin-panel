@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{#{% block javascript %}#}
+{#    <script language="JavaScript">#}
+{#        function toggle(source) {#}
+{#            checkboxes = document.getElementsByName('selected_options');#}
+{#            for (var checkbox in checkboxes)#}
+{#                checkbox.checked = source.checked;#}
+{#        }#}
+{#    </script>#}
+{#{% endblock %}#}
+
+{% block content %}
+    <script type="text/javascript">
+        function checkAll(e) {
+            var checkboxes = document.getElementsByName('selected_options');
+            if (e.checked) {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = true;
+                }
+            } else {
+                for (var k = 0; k < checkboxes.length; k++) {
+                    checkboxes[k].checked = false;
+                }
+            }
+        }
+    </script>
+    <h1>Admin page</h1>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"><input type='checkbox' name='showhide' onchange="checkAll(this)"></th>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Aviable</th>
+                <th scope="col">Last login</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <th scope="row">
+                        <input type="checkbox" name="selected_options" value={{ user.id }}>
+                    </th>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.last_login }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" class="btn" value="Block" name="blockbtn">
+        <input type="submit" class="btn" value="Unlock" name="unblockbtn">
+        <input type="submit" class="btn" value="Delete" name="delbtn">
+    </form>
+{% endblock %}

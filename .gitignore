@@ -1,0 +1,6 @@
+/.git/
+/.idea/
+/__pycache__/
+/mysite/__pycache__/
+/mysite/core/__pycache__/
+/mysite/core/migrations/__pycache__/
